@@ -29,8 +29,8 @@ Also the error conditions haven't been handled thoroughly. This program however 
 
 Running in Intellij Idea
 ========================
-I have used intellij idea and tried it out.
-It needs a selenium webdriver dependency.You can check pom.xml for its dependency list.
-To download the dependencies, you need to use maven (you might need to install if u dont have maven already on your system)
-Then its as simple as going into the root folder and running "mvn clean compile".
-Then right click on  "CheggDownloadRunner.java" and run it
+- I have used intellij idea and tried it out.
+- It needs a selenium webdriver dependency.You can check pom.xml for its dependency list.
+- To download the dependencies, you need to use maven (you might need to install if u dont have maven already on your system)
+- Then its as simple as going into the root folder and running "mvn clean compile".
+- Then right click on  "CheggDownloadRunner.java" and run it
