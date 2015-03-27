@@ -26,3 +26,11 @@ In this case you need to reset your username and password and run the program ag
 Note:
 It might not work if Chegg updates their html. If they update, you need to update the xpaths of the different elements in `SiteDetails.properties`
 Also the error conditions haven't been handled thoroughly. This program however will work as of Mar 27 2015.
+
+Running in Intellij Idea
+========================
+I have used intellij idea and tried it out.
+It needs a selenium webdriver dependency.You can check pom.xml for its dependency list.
+To download the dependencies, you need to use maven (you might need to install if u dont have maven already on your system)
+Then its as simple as going into the root folder and running "mvn clean compile".
+Then right click on  "CheggDownloadRunner.java" and run it
