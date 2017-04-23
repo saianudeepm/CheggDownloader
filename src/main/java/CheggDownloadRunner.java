@@ -10,7 +10,11 @@ public class CheggDownloadRunner {
     public static void main(String args[]) throws Exception {
         ScreenShotDownloader downloader= new ScreenShotDownloader();
         downloader.loginToServer();
+        System.out.println("login");
         downloader.navigateToBook();
+        System.out.println("Found");
+        //Thread.sleep(4000);
+
         downloader.downloadBook();
     }
 

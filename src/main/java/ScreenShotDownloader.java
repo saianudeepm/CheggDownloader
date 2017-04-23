@@ -1,9 +1,10 @@
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -31,6 +32,7 @@ public class ScreenShotDownloader {
 
     public Boolean loginToServer() throws Exception{
         driver.get(configMap.get("loginPage"));
+        Thread.sleep(100);
         //set the username
         driver.findElement(By.xpath((configMap.get("usernameXpath")))).sendKeys(configMap.get("username"));
         //set the password
@@ -54,34 +56,29 @@ public class ScreenShotDownloader {
     }
 
     public void downloadBook() throws InterruptedException{
-        String previousUrl="http://www.google.com";
-        String previousChapterProblem ="";
-        boolean isClicked =false;
         boolean reachedEnd = false;
-        while(!(driver.getCurrentUrl().equals(previousUrl) && reachedEnd)){
+        while(!reachedEnd){
             try{
-
-                String chapterNumber = driver.findElement(By.xpath(configMap.get("chapterXpath"))).getText();
-                String problemNumber = driver.findElement(By.xpath(configMap.get("problemXpath"))).getText();
-                if(previousChapterProblem.equals(chapterNumber+problemNumber)){
+                String info = driver.findElement(By.xpath(configMap.get("infoXpath"))).getText();
+                String chapterNumber = info.substring(0,info.indexOf(","));
+                String problemNumber = info.substring(info.indexOf(",")+2,info.length());
+                if(!driver.findElement(By.xpath(configMap.get("nextpageXpath"))).isDisplayed()){
                     reachedEnd = true;
-                    break;
                 }
-
-                previousChapterProblem = chapterNumber+problemNumber;
                 //set show answer if not set
-                if(!driver.findElement(By.xpath(configMap.get("showAnswerXpath"))).isSelected()&& !isClicked){
+                /*if(!driver.findElement(By.xpath(configMap.get("showAnswerXpath"))).isSelected()&& !isClicked){
                     driver.findElement(By.xpath(configMap.get("showAnswerXpath"))).click();
                     isClicked=true;
-                }
+                }*/
                 //capture the screenshot only when there is an available answer
                 if(!problemNumber.replaceAll(" ","").equalsIgnoreCase("N/A"))
                     captureScreen(chapterNumber,problemNumber);
-                previousUrl=driver.getCurrentUrl();
                 //go to next problem
-                driver.findElement(By.xpath(configMap.get("nextpageXpath"))).click();
-                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-                Thread.sleep(4000);
+                if(!reachedEnd) {
+                    driver.findElement(By.xpath(configMap.get("nextpageXpath"))).click();
+                    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                    Thread.sleep(2500);
+                }
             }catch (Exception e){
                 e.printStackTrace();
                 System.out.println(driver.getCurrentUrl());
