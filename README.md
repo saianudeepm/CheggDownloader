@@ -18,7 +18,7 @@ Problems/Modifications that might occur:
 ========================================
 1.Chegg might modify the xpath values in their site. In this case you need to update the xpaths in `SiteDetails.properties`
 
-2.You might have new version of Firefox and Webdriver version might be out of date. In that case please update `selenium-java` version in `pom.xml`
+2.You might have new version of Firefox and Webdriver downgrade to version 30 for full page screenshots
 
 3.Also if you run this program for a while, Chegg might block u as part of spam detection and might think your account is Compromised.
 In this case you need to reset your username and password and run the program again.

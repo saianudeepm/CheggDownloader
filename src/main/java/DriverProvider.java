@@ -1,6 +1,5 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,6 +12,7 @@ public class DriverProvider {
 
   public static synchronized WebDriver getDriver(){
       WebDriver driver = new FirefoxDriver();
+      driver.manage().window().maximize();
       return driver;
 
   }
