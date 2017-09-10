@@ -34,3 +34,13 @@ Running in Intellij Idea
 - To download the dependencies, you need to use maven (you might need to install if u dont have maven already on your system)
 - Then its as simple as going into the root folder and running "mvn clean compile".
 - Then right click on  "CheggDownloadRunner.java" and run it
+
+Known Issues
+========================
+- Some Black tlides happens to be bugs of ru.yandex.qatools.Ashot (through I directly change the value of viewport_height.js, it stills).
+- Bookmarks cannot be eliminated (through I change the opacity to 0, the scroll pops it).
+- Scripts to run it
+```shell
+mvn clean compile && cd target/classes && java CheggDownloadRunner
+```
+- Depends on ru.yandex.qatools.Ashot and selenium
